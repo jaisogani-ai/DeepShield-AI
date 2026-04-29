@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "ScanResult": {
+      "title": "ScanResult",
+      "description": "Represents a threat scan result.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "date": { "type": "string" },
+        "verdict": { "type": "string", "enum": ["REAL", "FAKE", "SUSPICIOUS", "SAFE", "DANGEROUS"] },
+        "confidence": { "type": "number" },
+        "threat_level": { "type": "string", "enum": ["SAFE", "LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+        "red_flags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "explanation_english": { "type": "string" },
+        "explanation_hindi": { "type": "string" },
+        "recommendation": { "type": "string" },
+        "scam_type": { "type": "string" },
+        "impersonating": { "type": "string" }
+      },
+      "required": ["id", "userId", "type", "date", "verdict", "confidence", "threat_level", "red_flags", "explanation_english", "recommendation"]
+    }
+  },
+  "firestore": {
+    "/scans/{scanId}": {
+      "schema": { "$ref": "#/entities/ScanResult" },
+      "description": "A collection of user-initiated threat scan results."
+    }
+  }
+}
